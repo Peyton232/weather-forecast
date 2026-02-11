@@ -1,0 +1,67 @@
+{
+    "info": {
+      "name": "Weather Forecast API",
+      "_postman_id": "weather-forecast-api",
+      "description": "Collection for testing the Weather Forecast service",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get Forecast - Valid Request",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/forecast?lat=39.7456&lon=-97.0892",
+            "host": ["{{baseUrl}}"],
+            "path": ["forecast"],
+            "query": [
+              {
+                "key": "lat",
+                "value": "39.7456"
+              },
+              {
+                "key": "lon",
+                "value": "-97.0892"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get Forecast - Missing Params",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/forecast",
+            "host": ["{{baseUrl}}"],
+            "path": ["forecast"]
+          }
+        }
+      },
+      {
+        "name": "Get Forecast - Invalid Latitude",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/forecast?lat=abc&lon=-97.0892",
+            "host": ["{{baseUrl}}"],
+            "path": ["forecast"],
+            "query": [
+              {
+                "key": "lat",
+                "value": "abc"
+              },
+              {
+                "key": "lon",
+                "value": "-97.0892"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+  

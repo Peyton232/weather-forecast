@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Forecast</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        #map { height: 400px; margin-bottom: 10px; }
+    </style>
+</head>
+
+<body>
+
+<h2>Select a Location</h2>
+
+<div id="map"></div>
+
+<p>
+    Lat: <input id="lat" name="lat">
+    Lon: <input id="lon" name="lon">
+    <button hx-get="/forecast"
+            hx-target="#result"
+            hx-include="#lat,#lon">
+        Get Forecast
+    </button>
+</p>
+
+<div id="result"></div>
+
+<script>
+    const map = L.map('map').setView([39.5, -98.35], 4);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+        .addTo(map);
+
+    let marker;
+
+    map.on('click', function(e) {
+        const lat = e.latlng.lat.toFixed(4);
+        const lon = e.latlng.lng.toFixed(4);
+
+        document.getElementById('lat').value = lat;
+        document.getElementById('lon').value = lon;
+
+        if (marker) {
+            marker.setLatLng(e.latlng);
+        } else {
+            marker = L.marker(e.latlng).addTo(map);
+        }
+    });
+</script>
+
+</body>
+</html>
